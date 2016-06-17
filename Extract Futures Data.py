@@ -4,13 +4,12 @@ from datetime import date
 import calendar
 
 ticker = ["DATE", "ABIRLANUVO", "ACC", "ADANIENT", "ADANIPORTS", "ADANIPOWER", "AJANTPHARM", "ALBK", "AMARAJABAT",
-          "AMBUJACEM",
-          "ANDHRABANK", "APOLLOHOSP", "APOLLOTYRE", "ARVIND", "ASHOKLEY", "ASIANPAINT", "AUROPHARMA", "AXISBANK",
-          "BAJAJ-AUTO", "BAJFINANCE", "BANKBARODA", "BANKINDIA", "BATAINDIA", "BEL", "BEML", "BHARATFORG", "BHARTIARTL",
-          "BHEL", "BIOCON", "BOSCHLTD", "BPCL", "BRITANNIA", "CADILAHC", "CAIRN", "CANBK", "CASTROLIND", "CEATLTD",
-          "CENTURYTEX", "CESC", "CIPLA", "COALINDIA", "COLPAL", "CONCOR", "CROMPGREAV", "CUMMINSIND", "DABUR", "DHFL",
-          "DISHTV", "DIVISLAB", "DLF", "DRREDDY", "EICHERMOT", "ENGINERSIN", "EXIDEIND", "FEDERALBNK", "GAIL",
-          "GLENMARK", "GMRINFRA", "GODREJCP", "GODREJIND", "GRANULES", "GRASIM", "HAVELLS", "HCLTECH", "HDFC",
+          "AMBUJACEM", "ANDHRABANK", "APOLLOHOSP", "APOLLOTYRE", "ARVIND", "ASHOKLEY", "ASIANPAINT", "AUROPHARMA",
+          "AXISBANK", "BAJAJ-AUTO", "BAJFINANCE", "BANKBARODA", "BANKINDIA", "BATAINDIA", "BEL", "BEML", "BHARATFORG",
+          "BHARTIARTL","BHEL", "BIOCON", "BOSCHLTD", "BPCL", "BRITANNIA", "CADILAHC", "CAIRN", "CANBK", "CASTROLIND",
+          "CEATLTD", "CENTURYTEX", "CESC", "CIPLA", "COALINDIA", "COLPAL", "CONCOR", "CROMPGREAV", "CUMMINSIND",
+          "DABUR", "DHFL", "DISHTV", "DIVISLAB", "DLF", "DRREDDY", "EICHERMOT", "ENGINERSIN", "EXIDEIND", "FEDERALBNK",
+          "GAIL", "GLENMARK", "GMRINFRA", "GODREJCP", "GODREJIND", "GRANULES", "GRASIM", "HAVELLS", "HCLTECH", "HDFC",
           "HDFCBANK", "HDIL", "HEROMOTOCO", "HEXAWARE", "HINDALCO", "HINDPETRO", "HINDUNILVR", "HINDZINC", "IBREALEST",
           "IBULHSGFIN", "ICICIBANK", "ICIL", "IDBI", "IDEA", "IDFC", "IFCI", "IGL", "INDIACEM", "INDUSINDBK",
           "INFRATEL", "INFY", "IOB", "IOC", "IRB", "ITC", "JETAIRWAYS", "JINDALSTEL", "JISLJALEQS", "JPASSOCIAT",
@@ -22,7 +21,11 @@ ticker = ["DATE", "ABIRLANUVO", "ACC", "ADANIENT", "ADANIPORTS", "ADANIPOWER", "
           "SRTRANSFIN", "STAR", "SUNPHARMA", "SUNTV", "SYNDIBANK", "TATACHEM", "TATACOMM", "TATAELXSI", "TATAGLOBAL",
           "TATAMOTORS", "TATAMTRDVR", "TATAPOWER", "TATASTEEL", "TCS", "TECHM", "TITAN", "TORNTPHARM", "TV18BRDCST",
           "TVSMOTOR", "UBL", "UCOBANK", "ULTRACEMCO", "UNIONBANK", "UNITECH", "UPL", "VEDL", "VOLTAS", "WIPRO",
-          "WOCKPHARMA", "YESBANK", "ZEEL"]
+           "WOCKPHARMA", "YESBANK", "ZEEL"]
+
+# Testing symbols 
+# ticker = ["DATE", "ABIRLANUVO", "ACC", "ADANIENT", "ADANIPORTS", "ADANIPOWER", "AJANTPHARM", "ALBK", "AMARAJABAT",
+#           "AMBUJACEM", "ANDHRABANK", "APOLLOHOSP", "APOLLOTYRE", "ARVIND", "ASHOKLEY", "ASIANPAINT", "AUROPHARMA"]
 
 fut_dict = {}
 
@@ -33,9 +36,7 @@ last_thursdays = [(2015, 1, 29), (2015, 2, 26), (2015, 3, 26), (2015, 4, 30), (2
                   (2015, 7, 30), (2015, 8, 27), (2015, 9, 24), (2015, 10, 29), (2015, 11, 26), (2015, 12, 31)]
 
 y = 2015
-# for m in range(1, 13):
-
-for m in range(1, 3):
+for m in range(1, 13):
     futures = pd.DataFrame(columns=ticker)
 
     nifty_fut = get_history(symbol=ticker[1],
@@ -62,22 +63,18 @@ for m in range(1, 3):
 
     fut_dict[key_list[m - 1]] = futures
 
-x = 0
-for x in range(len(key_list)):
-
-    if key_list[x] in fut_dict:
-        fut_dict[key_list[x]].to_csv("futstk_" + key_list[x] + ".csv", index=False, header=True)
-
-
-
-
-
+# Uncomment below if you want monthly file for year 2015
+# x = 0
+# for x in range(len(key_list)):
 #
-# nifty_fut.to_csv("nifty_fut.csv", index=False, header=False)
-#
-# nifty_fut.to_csv("nifty_fut.csv", index=True, header=True)
-#
-# new_data = pd.DataFrame(nifty_fut[['Date','Close']])
-#
-# new_data.columns = ['Date','TCS']
+#     if key_list[x] in fut_dict:
+#         fut_dict[key_list[x]].to_csv("futstk_" + key_list[x] + ".csv", index=False, header=True)
+
+
+final_file = pd.DataFrame(pd.concat([fut_dict[key_list[0]], fut_dict[key_list[1]], fut_dict[key_list[2]],
+                                     fut_dict[key_list[3]], fut_dict[key_list[4]], fut_dict[key_list[5]],
+                                     fut_dict[key_list[6]], fut_dict[key_list[7]], fut_dict[key_list[8]],
+                                     fut_dict[key_list[9]], fut_dict[key_list[10]], fut_dict[key_list[11]]]))
+
+final_file.to_csv("final.csv", index=False, header=True)
 
